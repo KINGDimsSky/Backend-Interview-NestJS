@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  password  String
+  createdAt DateTime @default(now())
+
+  @@map("admins") 
+}
+
+model Customer {
+  id           Int           @id @default(autoincrement())
+  name         String        @db.VarChar(100) 
+  phone        String        @unique @db.VarChar(20) 
+  address      String?       @db.Text 
+  transactions Transaction[]
+  createdAt    DateTime      @default(now())
+
+  @@map("customers")
+}
+
+model Transaction {
+  id         Int      @id @default(autoincrement())
+  weight     Float    
+  price      Float    
+  status     String   @default("PENDING") @db.VarChar(20) // Batasi string enum status
+  customerId Int
+  customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+
+  @@index([customerId]) 
+  @@map("transactions")
+}
