@@ -6,8 +6,8 @@ import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 @ApiTags('Customers')
-@ApiBearerAuth() // Wajib ada agar Swagger memunculkan gembok khusus untuk endpoint ini
-@UseGuards(JwtAuthGuard) // MENGUNCI SEMUA ROUTE DI BAWAH INI DENGAN JWT
+@ApiBearerAuth() 
+@UseGuards(JwtAuthGuard) 
 @Controller('customers')
 export class CustomersController {
   constructor(private readonly customersService: CustomersService) {}
@@ -24,7 +24,6 @@ export class CustomersController {
     return this.customersService.findAll();
   }
 
-  // ParseIntPipe menjamin ID yang masuk dari URL adalah angka murni
   @Get(':id')
   @ApiOperation({ summary: 'Mendapatkan data satu pelanggan' })
   findOne(@Param('id', ParseIntPipe) id: number) {

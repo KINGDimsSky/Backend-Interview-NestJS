@@ -7,7 +7,7 @@ import { LaundryModule } from './laundry/laundry.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }), // Mengaktifkan pembacaan .env di seluruh aplikasi
+    ConfigModule.forRoot({ isGlobal: true }), 
     PrismaModule, AuthModule, CustomersModule, LaundryModule,
   ],
 })

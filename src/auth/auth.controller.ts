@@ -1,4 +1,4 @@
-import { Controller, Post, Body, HttpCode, HttpStatus } from '@nestjs/common'; // FIX: Tambahkan HttpCode dan HttpStatus
+import { Controller, Post, Body, HttpCode, HttpStatus } from '@nestjs/common'; 
 import { AuthService } from './auth.service';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
@@ -17,7 +17,7 @@ export class AuthController {
   }
 
   @Post('login')
-  @HttpCode(HttpStatus.OK) // FIX: Paksa NestJS mengembalikan 200 OK, bukan 201 Created
+  @HttpCode(HttpStatus.OK) 
   @ApiOperation({ summary: 'Login admin untuk mendapatkan Bearer Token' })
   @ApiResponse({ status: 200, description: 'Sukses mendapatkan token' })
   @ApiResponse({ status: 401, description: 'Kredensial salah' })

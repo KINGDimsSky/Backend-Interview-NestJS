@@ -10,11 +10,11 @@ import { JwtStrategy } from './strategies/jwt.strategy';
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
       secret: process.env.JWT_SECRET || 'SECRET_KING_BACKUP_123',
-      signOptions: { expiresIn: '1d' }, // Token berlaku selama 1 hari
+      signOptions: { expiresIn: '1d' }, 
     }),
   ],
   providers: [AuthService, JwtStrategy],
   controllers: [AuthController],
-  exports: [JwtStrategy, PassportModule], // Eksport agar module lain bisa mengunci rutenya dengan Guard
+  exports: [JwtStrategy, PassportModule],
 })
 export class AuthModule {}

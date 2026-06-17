@@ -31,7 +31,7 @@ model Transaction {
   id         Int      @id @default(autoincrement())
   weight     Float    
   price      Float    
-  status     String   @default("PENDING") @db.VarChar(20) // Batasi string enum status
+  status     String   @default("PENDING") @db.VarChar(20)
   customerId Int
   customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
   createdAt  DateTime @default(now())

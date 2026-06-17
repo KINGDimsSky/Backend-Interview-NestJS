@@ -18,7 +18,6 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": true,
     
-    // TAMBAHKAN ATAU UPDATE BARIS DI BAWAH INI, KING:
     "types": ["jest", "node"] 
   }
 }

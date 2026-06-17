@@ -7,12 +7,10 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
 
-    // 1. Tentukan Status Code secara Akurat
     const status = exception instanceof HttpException
       ? exception.getStatus()
       : HttpStatus.INTERNAL_SERVER_ERROR;
 
-    // 2. Ekstrak Pesan Error secara Bersih
     let message = 'Internal Server Error';
     if (exception instanceof HttpException) {
       const res = exception.getResponse();
@@ -21,11 +19,10 @@ export class HttpExceptionFilter implements ExceptionFilter {
       message = exception.message;
     }
 
-    // 3. Kembalikan Response JSON dengan Standard Internasional
     return response.status(status).json({
       success: false,
       statusCode: status,
-      message: Array.isArray(message) ? message[0] : message, // Ambil pesan pertama jika error dari class-validator (Array)
+      message: Array.isArray(message) ? message[0] : message, 
       error: exception.name || 'ServerError',
       timestamp: new Date().toISOString(),
     });

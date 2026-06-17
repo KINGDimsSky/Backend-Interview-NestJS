@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import request = require('supertest');
 import { AppModule } from './../src/app.module';
-import { HttpExceptionFilter } from '../src/common/filters/http.exception.filter'; // Pastikan nama file sesuai (.exception atau -exception)
+import { HttpExceptionFilter } from '../src/common/filters/http.exception.filter';
 import { TransformInterceptor } from './../src/common/interceptors/transform.interceptor';
 import { PrismaService } from './../src/prisma/prisma.service';
 
@@ -37,7 +37,7 @@ describe('Authentication System (E2E)', () => {
   });
 
   it('POST /api/auth/register -> Harus sukses membuat admin baru (201)', async () => {
-    const response = await request(app.getHttpServer()) // Sekarang ini dijamin tidak akan error lagi
+    const response = await request(app.getHttpServer()) 
       .post('/api/auth/register')
       .send({
         username: dummyUsername,

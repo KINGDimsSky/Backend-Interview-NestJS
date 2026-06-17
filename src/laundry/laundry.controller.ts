@@ -7,7 +7,7 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard'; // RELATIVE PATH!
 
 @ApiTags('Laundry Transactions')
 @ApiBearerAuth()
-@UseGuards(JwtAuthGuard) // MENGUNCI MODUL TRANSAKSI DENGAN JWT
+@UseGuards(JwtAuthGuard) 
 @Controller('laundry')
 export class LaundryController {
   constructor(private readonly laundryService: LaundryService) {}

@@ -20,7 +20,6 @@ export class TransformInterceptor<T> implements NestInterceptor<T, ApiResponse<T
         success: true,
         statusCode: response.statusCode,
         message: 'Operation successful',
-        // Jika data yang dikembalikan service sudah memiliki properti kustom message, kita pakai itu
         data: data && data.result ? data.result : data,
       })),
     );

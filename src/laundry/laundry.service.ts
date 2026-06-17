@@ -5,16 +5,13 @@ import { UpdateLaundryDto } from './dto/update-laundry.dto';
 
 @Injectable()
 export class LaundryService {
-  // BEST PRACTICE: Harga per Kg idealnya disimpan di tabel Setting atau .env, 
-  // tapi untuk Simple REST API App, hardcode konstanta di Service sudah sangat cukup.
   private readonly PRICE_PER_KG = 8000;
 
   constructor(private prisma: PrismaService) {}
 
   async create(createLaundryDto: CreateLaundryDto) {
     const { weight, customerId } = createLaundryDto;
-    
-    // Server-Side Calculation: Harga dikalkulasi murni oleh backend
+
     const calculatedPrice = weight * this.PRICE_PER_KG;
 
     try {
@@ -25,11 +22,10 @@ export class LaundryService {
           customerId,
         },
         include: {
-          customer: true, // INNER JOIN: Kembalikan juga data pelanggan di dalam respon
+          customer: true, 
         },
       });
     } catch (error: any) {
-      // P2003: Foreign Key Constraint Failed (Customer tidak ditemukan)
       if (error.code === 'P2003') {
         throw new BadRequestException(`Gagal membuat transaksi. Customer dengan ID ${customerId} tidak ditemukan di sistem.`);
       }
@@ -65,7 +61,7 @@ export class LaundryService {
   }
 
   async remove(id: number) {
-    await this.findOne(id); // Validasi eksistensi
+    await this.findOne(id); 
 
     return await this.prisma.transaction.delete({
       where: { id },

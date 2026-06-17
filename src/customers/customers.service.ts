@@ -13,7 +13,6 @@ export class CustomersService {
         data: createCustomerDto,
       });
     } catch (error: any) {
-      // Edge Case: Prisma Error Code P2002 berarti ada pelanggaran Unique Constraint
       if (error.code === 'P2002') {
         throw new ConflictException('Nomor telepon ini sudah terdaftar.');
       }
